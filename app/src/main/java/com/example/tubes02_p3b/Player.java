@@ -35,10 +35,10 @@ public class Player {
 
     public Player(Context context, int screenX, int screenY){
         this.rect = new RectF();
-        this.panjang = screenX/10;
-        this.tinggi = screenY/10;
+        this.panjang = screenX / 10;
+        this.tinggi = screenY / 10;
         this.kiri = screenX / 2;
-        this.atas = screenY - 20;
+        this.atas = screenY - 50;
         this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.spaceship);
         this.bitmap = Bitmap.createScaledBitmap(this.bitmap,
                 (int) (this.panjang),
@@ -88,13 +88,14 @@ public class Player {
                 this.kiri = 0;
             }
         }
-
         if(shipMoving == RIGHT){
             this.kiri = this.kiri + this.kecepatan / fps;
             if(this.kiri + this.panjang > this.panjang * 10) {
                 this.kiri = this.panjang * 9;
             }
         }
+        rect.top = this.atas;
+        rect.bottom = this.atas + this.tinggi;
         rect.left = this.kiri;
         rect.right = this.kiri + this.panjang;
     }

@@ -22,21 +22,24 @@ public class Alien {
 
     //representasi alien
     private Bitmap alien;
+    private Bitmap alien2;
 
     boolean isVisible;
     Random r = new Random();
 
     public Alien(Context context, int screenX, int screenY, int row, int column) {
-        RectF r = new RectF();
+        this.square = new RectF();
         this.alien = BitmapFactory.decodeResource(context.getResources(), R.drawable.monster);
+        this.alien2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.monster2);
         this.alienSpeed = 50; //kecepatan alien bergerak (kiri-kanan)
         this.panjangAlien = screenX / 25;
         this.tinggiAlien = screenY / 25;
-        this.padding = screenX/25;
+        this.padding = screenY/25;
         this.x = column*(panjangAlien+padding);
         this.y = row*(panjangAlien+padding/4);
         this.isVisible = true;
-        alien = Bitmap.createScaledBitmap(alien, (int)panjangAlien, (int)tinggiAlien, false);
+        this.alien = Bitmap.createScaledBitmap(alien, (int)panjangAlien, (int)tinggiAlien, false);
+        this.alien2 = Bitmap.createScaledBitmap(alien2, (int)panjangAlien, (int)tinggiAlien, false);
     }
 
     public float getX(){
@@ -51,8 +54,16 @@ public class Alien {
         return panjangAlien;
     }
 
+    public float getTinggiAlien() {
+        return tinggiAlien;
+    }
+
     public Bitmap getAlien() {
         return alien;
+    }
+
+    public Bitmap getAlien2() {
+        return alien2;
     }
 
     public void setVisible() {
@@ -75,7 +86,7 @@ public class Alien {
         }
 
         y = y + tinggiAlien;
-        alienSpeed = alienSpeed * 2.18f;
+        alienSpeed = alienSpeed * 1.1f;
     }
 
     public void update(long fps){

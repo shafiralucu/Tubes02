@@ -15,6 +15,7 @@ public class Projectile {
 
     //Bitmap untuk projectile
     private Bitmap bitmap;
+    private Bitmap bitmap2;
 
     //Kode arah projectile
     public final int UP = 0;
@@ -38,8 +39,13 @@ public class Projectile {
         this.lebar = this.panjang;
         this.isActive = false;
         this.rect = new RectF();
-        this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.favorite);
+        this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.projectile);
+        this.bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.flame);
         this.bitmap = Bitmap.createScaledBitmap(this.bitmap,
+                (int) (this.panjang),
+                (int) (this.lebar),
+                false);
+        this.bitmap2 = Bitmap.createScaledBitmap(this.bitmap2,
                 (int) (this.panjang),
                 (int) (this.lebar),
                 false);
@@ -47,6 +53,22 @@ public class Projectile {
 
     public RectF getRect(){
         return this.rect;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public Bitmap getBitmap2() {
+        return bitmap2;
     }
 
     public boolean getStatus(){
@@ -86,8 +108,9 @@ public class Projectile {
         }else{
             this.y = this.y + this.kecepatan / fps;
         }
-        this.rect.top = this.y;
-        this.rect.bottom = this.y + this.lebar;
-
+        rect.left = x;
+        rect.right = x + this.panjang;
+        rect.top = y;
+        rect.bottom = y + this.lebar;
     }
 }
