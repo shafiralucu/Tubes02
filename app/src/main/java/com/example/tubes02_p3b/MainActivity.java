@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
+import android.widget.FrameLayout;
 
 // SpaceInvadersActivity is the entry point to the game.
 // It will handle the lifecycle of the game by calling
@@ -39,5 +40,11 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
         this.gameView.pause();
+    }
+
+    public void changePage(int i) {
+        if(i == 1) {
+
+        }
     }
 }

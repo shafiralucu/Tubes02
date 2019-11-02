@@ -206,7 +206,6 @@ public  class GameView extends SurfaceView implements Runnable{
                         this.lives = 3;
                         this.score = 0;
                         prepareLevel();
-
                     }
                 }
             }
@@ -214,13 +213,17 @@ public  class GameView extends SurfaceView implements Runnable{
         if(collision){
             for(int i = 0; i < this.numInvaders; i++){
                 this.invaders[i].dropDownAndReverse();
-                if(this.invaders[i].getY() + this.invaders[i].getTinggiAlien() >= this.screenY - this.screenY / 10){
-                    lost = true;
-                }
             }
             this.menaceInterval = this.menaceInterval - 80;
         }
+        if(this.invaders[0].getY() + this.invaders[0].getTinggiAlien() >= this.screenY - this.screenY / 10 - this.invaders[0].getTinggiAlien() * 4){
+            this.paused = true;
+            this.lives = 3;
+            this.score = 0;
+            prepareLevel();
+        }
         if(lost){
+            this.paused = true;
             prepareLevel();
         }
     }
@@ -228,7 +231,7 @@ public  class GameView extends SurfaceView implements Runnable{
     private void draw(){
         if (this.ourHolder.getSurface().isValid()) {
             this.canvas = this.ourHolder.lockCanvas();
-            this.canvas.drawColor(Color.argb(255, 26, 128, 182));
+            this.canvas.drawColor(Color.argb(255, 83, 9, 139));
             this.paint.setColor(Color.argb(255,  255, 255, 255));
             this.canvas.drawBitmap(this.playerShip.getBitmap(), this.playerShip.getKiri(), this.screenY - this.playerShip.getTinggi(), this.paint);
             for(int i = 0; i < this.numInvaders; i++){
@@ -285,7 +288,7 @@ public  class GameView extends SurfaceView implements Runnable{
                     }
                 }
                 if(motionEvent.getY() < screenY - screenY / 8) {
-                    this.projectile.shoot(playerShip.getKiri() + playerShip.getPanjang()/2, this.screenY, this.projectile.UP);
+                    this.projectile.shoot(playerShip.getKiri() + playerShip.getPanjang()/4, this.screenY, this.projectile.UP);
                     this.soundPool.play(this.shootID, 1, 1, 0, 0, 1);
                     this.canvas.drawBitmap(this.projectile.getBitmap(), this.projectile.getX(), this.projectile.getY(), this.paint);
                 }

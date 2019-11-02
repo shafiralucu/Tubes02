@@ -84,7 +84,6 @@ public class Alien {
         } else {
             alienMove = RIGHT;
         }
-
         y = y + tinggiAlien;
         alienSpeed = alienSpeed * 1.1f;
     }
